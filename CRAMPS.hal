@@ -32,13 +32,13 @@ loadrt limit1 count=2
 
 # Python user-mode HAL module to read ADC value and generate a thermostat output for PWM
 # c = analog input channel and thermistor table
-loadusr -Wn Therm hal_temp_bbb -n Therm -c 04:epcos_B57560G1104,05:epcos_B57560G1104 -b CRAMPS
+loadusr -Wn Therm hal_temp_bbb -n Therm -c 04:semitec_104GT_2,05:epcos_B57560G1104 -b CRAMPS
 
 # ################################################
 # THREADS
 # ################################################
 
-addf hpg.capture-position   servo-thread
+addf hpg.capture-position                 servo-thread
 addf bb_gpio.read                         servo-thread
 addf motion-command-handler               servo-thread
 addf motion-controller                    servo-thread
@@ -46,7 +46,7 @@ addf pid.0.do-pid-calcs                   servo-thread
 addf pid.1.do-pid-calcs                   servo-thread
 addf limit1.0                             servo-thread
 addf limit1.1                             servo-thread
-addf hpg.update             servo-thread
+addf hpg.update                           servo-thread
 addf bb_gpio.write                        servo-thread
 
 
@@ -267,13 +267,13 @@ setp bb_gpio.p9.in-13.invert 1
 
 # Uncomment if you actually have limit switches setup
 # You probably want to setup homing in the INI file, as well
-#net limit-x-min => axis.0.home-sw-in
+net limit-x-min => axis.0.home-sw-in
 #net limit-x-min => axis.0.neg-lim-sw-in
 #net limit-x-max => axis.0.pos-lim-sw-in
-#net limit-y-min => axis.1.home-sw-in
+net limit-y-min => axis.1.home-sw-in
 #net limit-y-min => axis.1.neg-lim-sw-in
 #net limit-y-max => axis.1.pos-lim-sw-in
-#net limit-z-min => axis.2.home-sw-in
+net limit-z-min => axis.2.home-sw-in
 #net limit-z-min => axis.2.neg-lim-sw-in
 #net limit-z-max => axis.2.pos-lim-sw-in
 
